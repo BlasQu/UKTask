@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UKTask</string>
+    <string name="jsonError">There was an error with reaching JSON file.</string>
 </resources>
