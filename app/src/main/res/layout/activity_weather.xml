@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".feature.weather.WeatherActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
