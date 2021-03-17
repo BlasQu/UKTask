@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".feature.weather.WeatherActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_weather"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="2dp"/>
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
