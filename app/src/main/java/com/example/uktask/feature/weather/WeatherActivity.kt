@@ -29,7 +29,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun setupRV() {
-        val data = loadFromJson(this, "data2.json")
+        val data = loadFromJson(this, "data.json")
         data?.let {
             val weather = Gson().fromJson(data, Weather::class.java)
             binding.rvWeather.apply {
