@@ -12,4 +12,12 @@ class CityImage {
             else -> R.drawable.noimg
         }
     }
+    fun iconImage(weather: String): Int {
+        return when (weather) {
+            "sunny" -> R.drawable.sunny
+            "rainy" -> R.drawable.rainy
+            "cloudy" -> R.drawable.cloudy
+            else -> R.drawable.noimg
+        }
+    }
 }
