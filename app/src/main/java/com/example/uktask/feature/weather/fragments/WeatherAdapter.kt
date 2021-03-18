@@ -26,7 +26,9 @@ class WeatherAdapter(
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.textCity.text = data[position].city
-        holder.binding.cardBgImage.setImageDrawable(ResourcesCompat.getDrawable(holder.itemView.context.resources, CityImage().cardImage(data[position].city), holder.itemView.context.theme))
+        holder.binding.cardBgImage.setImageDrawable(ResourcesCompat.getDrawable(holder.itemView.context.resources,
+                CityImage().cardImage(data[position].city),
+                holder.itemView.context.theme))
     }
     override fun getItemCount(): Int {
         return data.size
