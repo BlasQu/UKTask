@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uktask.R
 import com.example.uktask.databinding.FragmentCityBinding
 import com.example.uktask.feature.weather.WeatherActivity
 import com.example.uktask.feature.weather.WeatherViewmodel
 import com.example.uktask.util.CityImage
+import com.example.uktask.util.Divider
 import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -28,11 +30,14 @@ class CityFragment : Fragment(R.layout.fragment_city) {
     }
 
     private fun setupRV() {
+        val divideItemDecoration = Divider(weatherActivity)
+        divideItemDecoration.setDrawable(resources.getDrawable(R.drawable.item_decoration, weatherActivity.theme))
         val data = viewmodel.currentCity.value?.hourly_temp
         data?.let {
             binding.rvTemperatures.apply {
                 layoutManager = LinearLayoutManager(weatherActivity)
                 adapter = this@CityFragment.adapter
+                addItemDecoration(divideItemDecoration)
             }
             adapter.submitData(data)
         }

@@ -16,7 +16,7 @@ class CityTemperaturesAdapter: RecyclerView.Adapter<CityTemperaturesAdapter.View
         return ViewHolder(ItemTemperatureBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.textHourtemp.text = "Hour ${data[position].hour} - ${data[position].temp}°C"
+        holder.binding.textHourtemp.text = "${data[position].hour.toInt()}:00 - (${data[position].temp})°C"
     }
     override fun getItemCount(): Int {
         return data.size
