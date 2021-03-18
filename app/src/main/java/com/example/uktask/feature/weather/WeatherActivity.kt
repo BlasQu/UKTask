@@ -2,19 +2,13 @@ package com.example.uktask.feature.weather
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.uktask.R
-import com.example.uktask.data.models.Temperature
-import com.example.uktask.data.models.Weather
 import com.example.uktask.data.models.WeatherItem
 import com.example.uktask.databinding.ActivityWeatherBinding
 import com.example.uktask.feature.weather.fragments.CityFragment
 import com.example.uktask.feature.weather.fragments.WeatherFragment
-import com.google.gson.Gson
 import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 class WeatherActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWeatherBinding
@@ -27,7 +21,15 @@ class WeatherActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupFragments()
+        setupToolbar()
         viewmodel.temperatures() // Showing task results (temperatures) in Console - You can search with ,,Zadania'' in Debug
+    }
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbarLayout.root)
+        supportActionBar?.apply {
+            title = "Cities"
+            setDisplayHomeAsUpEnabled(false)
+        }
     }
     private fun setupFragments() {
         supportFragmentManager.beginTransaction().apply {
@@ -37,11 +39,53 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
     fun changeFragment(item: WeatherItem) {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_container, cityFragment)
-            addToBackStack("CityFragment")
-            commit()
+        when (getLastFragmentName()) {
+            "WeatherFragment" -> {
+                viewmodel.currentCity.value = item
+                supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.fragment_container, cityFragment)
+                    addToBackStack("CityFragment")
+                    commit()
+                }
+                supportActionBar?.apply {
+                    title = "Weather in ${item.city}"
+                    setDisplayHomeAsUpEnabled(true)
+                }
+            }
+            "CityFragment" -> {
+                supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.fragment_container, weatherFragment)
+                    addToBackStack("WeatherFragment")
+                    commit()
+                }
+                supportActionBar?.apply {
+                    title = "Cities"
+                    setDisplayHomeAsUpEnabled(false)
+                }
+            }
         }
-        viewmodel.currentCity.value = item
+    }
+    private fun getLastFragmentName(): String {
+        val entries = supportFragmentManager.backStackEntryCount
+        return supportFragmentManager.getBackStackEntryAt(entries-1).name!!
+    }
+
+    override fun onBackPressed() {
+        if(getLastFragmentName() == "CityFragment") {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, weatherFragment)
+                addToBackStack("WeatherFragment")
+                commit()
+            }
+            supportActionBar?.apply {
+                title = "Cities"
+                setDisplayHomeAsUpEnabled(false)
+            }
+        } else finish()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }
