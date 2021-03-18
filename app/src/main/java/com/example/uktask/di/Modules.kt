@@ -1,5 +1,6 @@
 package com.example.uktask.di
 
+import com.example.uktask.data.models.WeatherItem
 import com.example.uktask.feature.weather.WeatherRepository
 import com.example.uktask.feature.weather.WeatherViewmodel
 import com.example.uktask.feature.weather.fragments.CityFragment
@@ -10,7 +11,7 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val adaptersModule = module {
-    factory { WeatherAdapter() }
+    factory { (click: (WeatherItem) -> Unit) -> WeatherAdapter(click) }
 }
 
 val fragmentsModule = module {

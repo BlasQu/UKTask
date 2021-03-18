@@ -1,6 +1,5 @@
 package com.example.uktask.feature.weather.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,15 +10,13 @@ import com.example.uktask.data.models.Weather
 import com.example.uktask.databinding.FragmentWeatherBinding
 import com.example.uktask.feature.weather.WeatherActivity
 import com.example.uktask.feature.weather.WeatherViewmodel
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var weatherActivity: WeatherActivity
-    private val adapter = get<WeatherAdapter>()
+    private val adapter = WeatherAdapter { item -> weatherActivity.changeFragment(item) }
     private val viewmodel by sharedViewModel<WeatherViewmodel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

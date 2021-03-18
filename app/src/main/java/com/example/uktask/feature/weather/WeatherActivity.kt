@@ -6,6 +6,7 @@ import android.util.Log
 import com.example.uktask.R
 import com.example.uktask.data.models.Temperature
 import com.example.uktask.data.models.Weather
+import com.example.uktask.data.models.WeatherItem
 import com.example.uktask.databinding.ActivityWeatherBinding
 import com.example.uktask.feature.weather.fragments.CityFragment
 import com.example.uktask.feature.weather.fragments.WeatherFragment
@@ -35,7 +36,12 @@ class WeatherActivity : AppCompatActivity() {
             commit()
         }
     }
-    private fun changeFragment() {
-
+    fun changeFragment(item: WeatherItem) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_container, cityFragment)
+            addToBackStack("CityFragment")
+            commit()
+        }
+        viewmodel.currentCity.value = item
     }
 }
