@@ -1,12 +1,10 @@
 package com.example.uktask.feature.weather.fragments
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.uktask.R
 import com.example.uktask.data.models.WeatherItem
 import com.example.uktask.databinding.ItemWeatherBinding
 import com.example.uktask.util.CityImage

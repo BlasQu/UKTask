@@ -2,7 +2,6 @@ package com.example.uktask.util
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.uktask.data.models.HourlyTemp
-import com.example.uktask.data.models.WeatherItem
 
 class DiffCallbackTemp(val oldList: List<HourlyTemp>, val newList: List<HourlyTemp>): DiffUtil.Callback() {
     override fun getOldListSize(): Int {
