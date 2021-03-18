@@ -9,6 +9,7 @@
         android:id="@+id/rv_weather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_animation_weather_item"
         android:padding="2dp"/>
 
 </FrameLayout>
